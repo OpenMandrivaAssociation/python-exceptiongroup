@@ -34,7 +34,9 @@ export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %check
 export CI=true
 export PYTHONPATH="%{buildroot}%{python_sitelib}:${PWD}"
-pytest -v
+# Python 3.15 copies the exception sequence, and its attribute
+# suggestions say ".append" rather than "'append'?".
+pytest -v -k 'not test_exceptions_mutate_original_sequence and not test_nameerror_suggestions_in_group'
 %endif
 
 %files
