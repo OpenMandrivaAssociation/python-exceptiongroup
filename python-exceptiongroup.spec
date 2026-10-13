@@ -3,7 +3,7 @@
 
 Name:		python-exceptiongroup
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	MIT AND Python-2.0
 Summary:	Backport of PEP 654 (exception groups)
 Group:		Development/Python
@@ -25,6 +25,10 @@ BuildRequires:	python%{pyver}dist(pytest)
 Backport of PEP 654 (exception groups)
 This is a backport of the BaseExceptionGroup and ExceptionGroup classes from
 Python 3.11.
+
+%build -p
+# flit-scm reads the version from git. The PyPI sdist is not a checkout.
+export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 
 %if %{with tests}
 %check
